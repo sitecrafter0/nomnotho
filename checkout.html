@@ -11,6 +11,181 @@
     margin: 0;
     color: #333;
   }
+
   header {
     background: #f1e9e0;
-    padding: 15
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  header h1 {
+    color: #8b5e3c;
+    font-size: 1.2em;
+  }
+
+  nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #8b5e3c;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  .checkout-container {
+    max-width: 500px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .checkout-container h2 {
+    text-align: center;
+    color: #8b5e3c;
+    margin-bottom: 20px;
+  }
+
+  .checkout-container label {
+    display: block;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+  }
+
+  .checkout-container input, 
+  .checkout-container select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    font-size: 1em;
+  }
+
+  .payment-methods {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .payment-methods button {
+    background: #8b5e3c;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+
+  .payment-methods button:hover {
+    background: #a7765c;
+  }
+
+  @media (max-width: 600px) {
+    .checkout-container {
+      margin: 15px;
+      padding: 15px;
+    }
+
+    header h1 {
+      font-size: 1em;
+    }
+
+    .payment-methods button {
+      font-size: 0.95em;
+      padding: 10px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Nomnotho Online Deals</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cart.html">View Cart</a>
+  </nav>
+</header>
+
+<div class="checkout-container">
+  <h2>Checkout</h2>
+
+  <label for="fullname">Full Name</label>
+  <input type="text" id="fullname" placeholder="Enter your full name">
+
+  <label for="surname">Surname</label>
+  <input type="text" id="surname" placeholder="Enter your surname">
+
+  <label for="address">Full Address</label>
+  <input type="text" id="address" placeholder="Street, Suburb, City, Postal Code">
+
+  <label for="payment">Select Payment Method</label>
+  <select id="payment" onchange="showPaymentForm()">
+    <option value="">--Choose Payment--</option>
+    <option value="paypal">PayPal</option>
+    <option value="payfast">PayFast</option>
+    <option value="eft">EFT</option>
+  </select>
+
+  <div id="paypalForm" style="display:none;">
+    <label>PayPal Email</label>
+    <input type="email" placeholder="Enter your PayPal email">
+  </div>
+
+  <div id="payfastForm" style="display:none;">
+    <label>PayFast Email</label>
+    <input type="email" placeholder="Enter your PayFast email">
+  </div>
+
+  <div id="eftForm" style="display:none;">
+    <label>Bank Name</label>
+    <input type="text" placeholder="e.g., ABSA">
+    <label>Account Number</label>
+    <input type="text" placeholder="e.g., 1234567890">
+  </div>
+
+  <div class="payment-methods">
+    <button onclick="submitCheckout()">Pay & Complete Order</button>
+  </div>
+</div>
+
+<script>
+function showPaymentForm() {
+  const method = document.getElementById('payment').value;
+  document.getElementById('paypalForm').style.display = 'none';
+  document.getElementById('payfastForm').style.display = 'none';
+  document.getElementById('eftForm').style.display = 'none';
+
+  if(method === 'paypal') document.getElementById('paypalForm').style.display = 'block';
+  if(method === 'payfast') document.getElementById('payfastForm').style.display = 'block';
+  if(method === 'eft') document.getElementById('eftForm').style.display = 'block';
+}
+
+function submitCheckout() {
+  const name = document.getElementById('fullname').value.trim();
+  const surname = document.getElementById('surname').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const payment = document.getElementById('payment').value;
+
+  if(!name || !surname || !address || !payment){
+    alert("Please fill all required fields and select a payment method.");
+    return;
+  }
+
+  alert("Thank you " + name + "! Your order has been received. We will contact you regarding the payment.");
+  // Here you would connect to your PayPal/PayFast API to process the payment
+}
+</script>
+
+</body>
+</html>
