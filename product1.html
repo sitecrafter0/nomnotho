@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Face Cream - Nomnotho Online Deals</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<h1>Nomnotho Online Deals</h1>
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="faq.html">FAQ</a>
+<a href="contact.html">Contact</a>
+</nav>
+</header>
+
+<div class="product-section">
+<h2>Luxury Face Cream</h2>
+
+<div class="product-images">
+<img src="https://source.unsplash.com/300x300/?beauty,cream" alt="">
+<img src="https://source.unsplash.com/300x300/?skincare" alt="">
+<img src="https://source.unsplash.com/300x300/?cosmetics" alt="">
+</div>
+
+<p class="price">R350</p>
+
+<div class="payment-options">
+<button>EFT</button>
+<button>PayPal</button>
+<button>PayFast</button>
+</div>
+
+<div class="description">
+<p>This luxurious face cream nourishes your skin and keeps it soft and glowing. Suitable for all skin types. Apply daily for best results.</p>
+</div>
+
+<div class="review-section">
+<h3>Reviews:</h3>
+<textarea id="review-text1" placeholder="Write your review..."></textarea>
+<button onclick="addReview(1)">Submit</button>
+<div class="reviews-list" id="reviews-list1"></div>
+</div>
+
+</div>
+
+<footer>
+<p>&copy; 2025 Nomnotho Online Deals</p>
+</footer>
+
+<script>
+let reviews = {};
+function addReview(num) {
+  const textArea = document.getElementById('review-text'+num);
+  const text = textArea.value.trim();
+  if(text === '') return;
+  if(!reviews[num]) reviews[num] = [];
+  reviews[num].push(text);
+  const div = document.getElementById('reviews-list'+num);
+  const p = document.createElement('p');
+  p.textContent = text;
+  div.appendChild(p);
+  textArea.value = '';
+}
+</script>
+
+</body>
+</html>

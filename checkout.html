@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout - Nomnotho Online Deals</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf5ee;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background-color: #f3e1d1;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #b66e41;
+            font-weight: bold;
+        }
+
+        .checkout-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff7f0;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #b66e41;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: #8c4c29;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            background-color: #b66e41;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #8c4c29;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Nomnotho Online Deals</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+            <a href="cart.html">Cart</a>
+        </nav>
+    </header>
+
+    <div class="checkout-container">
+        <h2>Checkout</h2>
+
+        <ul id="checkout-items"></ul>
+        <p>Total: R<span id="checkout-total">0</span></p>
+
+        <form id="payment-form">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required>
+
+            <label for="address">Full Address:</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+
+            <label for="payment-method">Payment Method:</label>
+            <select id="payment-method" name="payment-method" required>
+                <option value="">Select</option>
+                <option value="EFT">EFT</option>
+                <option value="PayPal">PayPal</option>
+                <option value="PayFast">PayFast</option>
+            </select>
+
+            <button type="submit">Pay Now</button>
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2025 Nomnotho Online Deals
+    </footer>
+
+    <script>
+        // Load cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Display items in checkout
+        function renderCheckout() {
+            const checkoutItems = document.getElementById('checkout-items');
+            const checkoutTotal = document.getElementById('checkout-total');
+            checkoutItems.innerHTML = '';
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price;
+                checkoutItems.innerHTML += `<li>${item.name} - R${item.price}</li>`;
+            });
+            checkoutTotal.textContent = total;
+        }
+
+        renderCheckout();
+
+        // Handle form submission
+        document.getElementById('payment-form').addEventListener('submit', function(e){
+            e.preventDefault();
+
+            // You can later integrate real payment here
+            alert("Payment submitted! Total: R" + cart.reduce((a,b)=>a+b.price,0));
+
+            // Clear cart after payment
+            localStorage.removeItem('cart');
+
+            // Redirect to homepage
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>
