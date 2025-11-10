@@ -302,10 +302,18 @@ function filterCategory(category) {
   });
 }
 function addToCart(name, price){
+    // Get existing cart from localStorage or start empty
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Add this product
     cart.push({name, price});
+    
+    // Save updated cart to localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // Notify the user
     alert(name + " added to cart!");
+}
 </script>
 
 }
