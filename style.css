@@ -120,3 +120,26 @@ footer {
     color: #b66e41;
     border-top: 1px solid #ccc;
 }
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .product button, 
+  .dropbtn, 
+  #searchInput,
+  .cart button,
+  .checkout-form input,
+  .checkout-form select {
+    width: 100%;        /* full width */
+    font-size: 1em;     /* increase text size if needed */
+    padding: 12px;      /* make buttons easier to tap */
+    margin-bottom: 10px;
+  }
+
+  .cart, .checkout-form {
+    padding: 15px;      /* add spacing around content */
+    box-sizing: border-box;
+  }
+  
+  .products {
+    grid-template-columns: 1fr; /* make product grid single column */
+  }
+}
