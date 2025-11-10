@@ -1,149 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Shopping Cart - Nomnotho Online Deals</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fdf5ee;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart - Nomnotho Online Deals</title>
+<style>
+  body {
+    background: #f9f5f0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    color: #333;
+  }
 
-        header, footer {
-            background-color: #f3e1d1;
-            padding: 15px;
-            text-align: center;
-        }
+  header {
+    background: #f1e9e0;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
 
-        nav a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: #b66e41;
-            font-weight: bold;
-        }
+  header h1 {
+    color: #8b5e3c;
+    font-size: 1.2em;
+  }
 
-        .cart-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #fff7f0;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
+  nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #8b5e3c;
+  }
 
-        h2 {
-            color: #b66e41;
-            margin-bottom: 20px;
-        }
+  nav a:hover {
+    text-decoration: underline;
+  }
 
-        ul {
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 20px;
-        }
+  .cart-container {
+    max-width: 600px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
 
-        ul li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #fdeee0;
-            border-radius: 8px;
-        }
+  .cart-container h2 {
+    text-align: center;
+    color: #8b5e3c;
+    margin-bottom: 20px;
+  }
 
-        ul li button {
-            background-color: #b66e41;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+  }
 
-        ul li button:hover {
-            background-color: #8c4c29;
-        }
+  .cart-item:last-child {
+    border-bottom: none;
+  }
 
-        .total {
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
+  .cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+  }
 
-        .checkout-btn {
-            width: 100%;
-            background-color: #b66e41;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-        }
+  .cart-item-details {
+    flex: 1;
+  }
 
-        .checkout-btn:hover {
-            background-color: #8c4c29;
-        }
-    </style>
+  .cart-item-details h4 {
+    margin: 0;
+    font-size: 1em;
+    color: #8b5e3c;
+  }
+
+  .cart-item-details p {
+    margin: 3px 0;
+    font-size: 0.9em;
+  }
+
+  .cart-item button {
+    background: #8b5e3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .cart-item button:hover {
+    background: #a7765c;
+  }
+
+  .total {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 1.2em;
+  }
+
+  .checkout-btn {
+    width: 100%;
+    background: #8b5e3c;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+  }
+
+  .checkout-btn:hover {
+    background: #a7765c;
+  }
+
+  @media (max-width: 600px) {
+    .cart-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .cart-item img {
+      margin-bottom: 8px;
+    }
+
+    .total {
+      font-size: 1.1em;
+    }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Nomnotho Online Deals</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="faq.html">FAQ</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
 
-    <div class="cart-container">
-        <h2>Your Shopping Cart</h2>
+<header>
+  <h1>Nomnotho Online Deals</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="checkout.html">Checkout</a>
+  </nav>
+</header>
 
-        <ul id="cart-items"></ul>
-        <p class="total">Total: R<span id="cart-total">0</span></p>
+<div class="cart-container">
+  <h2>Your Cart</h2>
+  <div id="cartItems"></div>
+  <div class="total" id="cartTotal">Total: R0</div>
+  <button class="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+</div>
 
-        <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
-    </div>
+<script>
+// Load cart from localStorage
+function loadCart() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const cartItemsDiv = document.getElementById('cartItems');
+  cartItemsDiv.innerHTML = '';
 
-    <footer>
-        &copy; 2025 Nomnotho Online Deals
-    </footer>
+  let total = 0;
 
-    <script>
-        // Load cart from localStorage
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.forEach((item, index) => {
+    total += item.price;
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'cart-item';
+    itemDiv.innerHTML = `
+      <img src="https://source.unsplash.com/60x60/?${encodeURIComponent(item.name)}" alt="${item.name}">
+      <div class="cart-item-details">
+        <h4>${item.name}</h4>
+        <p>R${item.price}</p>
+      </div>
+      <button onclick="removeItem(${index})">Remove</button>
+    `;
+    cartItemsDiv.appendChild(itemDiv);
+  });
 
-        function renderCart() {
-            const cartItems = document.getElementById('cart-items');
-            const cartTotal = document.getElementById('cart-total');
-            cartItems.innerHTML = '';
-            let total = 0;
-            cart.forEach((item, index) => {
-                total += item.price;
-                cartItems.innerHTML += `<li>
-                    <span>${item.name} - R${item.price}</span>
-                    <button onclick="removeItem(${index})">Remove</button>
-                </li>`;
-            });
-            cartTotal.textContent = total;
-        }
+  document.getElementById('cartTotal').textContent = 'Total: R' + total;
+}
 
-        function removeItem(index) {
-            cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCart();
-        }
+// Remove item from cart
+function removeItem(index) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.splice(index, 1);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  loadCart();
+}
 
-        // Render cart on page load
-        renderCart();
-    </script>
+// Go to checkout
+function goToCheckout() {
+  window.location.href = 'checkout.html';
+}
+
+// Initial load
+loadCart();
+</script>
+
 </body>
 </html>
