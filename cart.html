@@ -3,63 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>View Cart - Nomnotho Online Deals</title>
-<link rel="stylesheet" href="style.css">
+<title>Shopping Cart - Nomnotho Online Deals</title>
 <style>
-body {background:#f9f5f0; font-family:Arial, sans-serif; margin:0; color:#333;}
-header {background:#f1e9e0; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0;}
-header h1 {color:#8b5e3c;}
-header nav a {margin:0 10px; text-decoration:none; color:#8b5e3c;}
-header nav a:hover {text-decoration:underline;}
-.cart-container {max-width:600px; margin:30px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-.cart-container h2 {text-align:center; color:#8b5e3c;}
-#cart-items {list-style:none; padding:0; margin:20px 0;}
-#cart-items li {background:#f1e9e0; padding:10px; margin-bottom:10px; border-radius:5px; display:flex; justify-content:space-between;}
-#cart-total {font-weight:bold; color:#8b5e3c;}
-.checkout-btn {display:block; width:100%; padding:12px; background:#8b5e3c; color:white; border:none; border-radius:5px; cursor:pointer; font-size:1.1em; margin-top:20px;}
-.checkout-btn:hover {background:#a7765c;}
+body {background:#f9f5f0; font-family:Arial,sans-serif; margin:0; color:#333;}
+header {background:#f1e9e0; padding:15px 20px; text-align:center;}
+h1 {color:#8b5e3c;}
+.cart-container {max-width:600px; margin:20px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+.cart-item {display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #ccc;}
+.cart-item:last-child {border-bottom:none;}
+button {background:#8b5e3c; color:white; border:none; padding:7px 12px; border-radius:5px; cursor:pointer;}
+button:hover {background:#a7765c;}
+.total {text-align:right; font-weight:bold; margin-top:10px; font-size:1.2em;}
+.checkout-btn {display:block; width:100%; margin-top:20px; padding:10px; font-size:1em;}
+@media(max-width:480px){
+  .cart-item {flex-direction:column; align-items:flex-start;}
+  .cart-item button {margin-top:5px;}
+}
 </style>
 </head>
 <body>
 
 <header>
-<h1>Nomnotho Online Deals</h1>
-<nav>
-<a href="index.html">Home</a>
-<a href="about.html">About Us</a>
-<a href="faq.html">FAQ</a>
-<a href="contact.html">Contact</a>
-</nav>
+<h1>Nomnotho Online Deals - Cart</h1>
 </header>
 
 <div class="cart-container">
-<h2>Your Cart</h2>
-<ul id="cart-items">
-<!-- Cart items will appear here -->
-</ul>
-<p>Total: R<span id="cart-total">0</span></p>
-<button class="checkout-btn" onclick="goToCheckout()">Checkout</button>
+  <div id="cart-items"></div>
+  <p class="total">Total: R<span id="cart-total">0</span></p>
+  <button class="checkout-btn" onclick="goToCheckout()">Checkout</button>
 </div>
 
 <script>
-// Display cart items
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let cartList = document.getElementById('cart-items');
-let total = 0;
+// Load cart from localStorage
+function loadCart() {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const container = document.getElementById('cart-items');
+  container.innerHTML = '';
 
-cart.forEach(item => {
-  let li = document.createElement('li');
-  li.textContent = item.name + " - R" + item.price;
-  cartList.appendChild(li);
-  total += item.price;
-});
+  cart.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <span>${item.name} - R${item.price}</span>
+      <button onclick="removeItem(${index})">Remove</button>
+    `;
+    container.appendChild(div);
+  });
 
-document.getElementById('cart-total').textContent = total;
-
-// Checkout button
-function goToCheckout() {
-  window.location.href = "checkout.html";
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  document.getElementById('cart-total').textContent = total;
 }
+
+// Remove an item by index
+function removeItem(index) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.splice(index, 1);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  loadCart();
+}
+
+// Go to checkout page
+function goToCheckout() {
+  window.location.href = 'checkout.html';
+}
+
+// Initialize
+loadCart();
 </script>
 
 </body>
