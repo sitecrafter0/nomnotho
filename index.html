@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><link rel="stylesheet" href="style.css"></head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nomnotho Online Deals</title>
+<style>
+body {background:#f9f5f0; font-family:Arial, sans-serif; margin:0; color:#333;}
+header {background:#f1e9e0; padding:15px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:1000;}
+header h1 {color:#8b5e3c;}
+nav a {margin:0 10px; text-decoration:none; color:#8b5e3c;}
+nav a:hover {text-decoration:underline;}
+.banner {background:#f5e9dd; padding:20px; text-align:center; font-size:1.5em; color:#8b5e3c; margin-bottom:20px;}
+.search-bar {text-align:center; margin-bottom:30px;}
+.search-bar input {width:50%; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:1em;}
+.products {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; padding:0 20px;}
+.product {background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+.product img {width:100%; border-radius:10px;}
+.product h3 {color:#8b5e3c; margin:10px 0 5px 0;}
+.product p {margin:5px 0;}
+.product .price {font-weight:bold; color:#8b5e3c;}
+.product button {background:#8b5e3c; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; margin-top:5px;}
+.product button:hover {background:#a7765c;}
+.product-section {background:#fff; padding:20px; border-radius:10px; margin:40px 20px; display:none; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+.product-section h2 {color:#8b5e3c;}
+.product-images {display:flex; gap:10px; margin-bottom:20px;}
+.product-images img {width:100%; max-width:200px; border-radius:10px;}
+.payment-options button {margin-right:10px; margin-bottom:10px;}
+.review-section textarea {width:100%; height:60px; padding:5px; border-radius:5px; border:1px solid #ccc; margin-bottom:5px;}
+.review-section button {background:#8b5e3c; color:#fff; border:none; padding:7px 15px; border-radius:5px; cursor:pointer;}
+.review-section button:hover {background:#a7765c;}
+.reviews-list p {background:#f1e9e0; padding:5px; border-radius:5px; margin-bottom:5px;}
+footer {background:#f1e9e0; text-align:center; padding:20px; margin-top:30px;}
+/* Dropdown Styles */
+.dropdown {display: inline-block; position: relative;}
+.dropbtn {background: #8b5e3c; color: white; padding: 8px 15px; border: none; cursor: pointer; border-radius: 5px; font-size: 1em;}
+.dropbtn:hover {background: #a7765c;}
+.dropdown-content {display: none; position: absolute; background-color: #f1e9e0; min-width: 200px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1; border-radius: 5px; padding: 10px;}
+.dropdown-content a, .dropdown-content strong {display: block; color: #8b5e3c; padding: 5px 0; text-decoration: none;}
+.dropdown-content a:hover {text-decoration: underline;}
+.dropdown:hover .dropdown-content {display: block;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Nomnotho Online Deals</h1>
+<nav>
+  <a href="#home">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">Contact</a>
+  
+  <!-- Dropdown Menu -->
+  <div class="dropdown">
+    <button class="dropbtn">Categories ▼</button>
+    <div class="dropdown-content">
+      <strong>Perfume</strong>
+      <a href="javascript:void(0)" onclick="filterCategory('perfume')">Women Perfume</a>
+      
+      <strong>Women Accessories</strong>
+      <a href="javascript:void(0)" onclick="filterCategory('women-accessories')">Bags</a>
+      <a href="javascript:void(0)" onclick="filterCategory('women-accessories')">Jewelry</a>
+      <a href="javascript:void(0)" onclick="filterCategory('women-accessories')">Scarves</a>
+      <a href="javascript:void(0)" onclick="filterCategory('women-accessories')">Sunglasses</a>
+      <a href="javascript:void(0)" onclick="filterCategory('women-accessories')">Hats</a>
+      
+      <strong>Skincare</strong>
+      <a href="javascript:void(0)" onclick="filterCategory('skincare')">Face Cream</a>
+      <a href="javascript:void(0)" onclick="filterCategory('skincare')">Serum</a>
+      <a href="javascript:void(0)" onclick="filterCategory('skincare')">Toner</a>
+      <a href="javascript:void(0)" onclick="filterCategory('skincare')">Face Mask</a>
+      <a href="javascript:void(0)" onclick="filterCategory('skincare')">Eye Cream</a>
+
+      <strong>Cosmetics</strong>
+      <a href="javascript:void(0)" onclick="filterCategory('cosmetics')">Lipstick</a>
+      <a href="javascript:void(0)" onclick="filterCategory('cosmetics')">Foundation</a>
+      <a href="javascript:void(0)" onclick="filterCategory('cosmetics')">Blush</a>
+      <a href="javascript:void(0)" onclick="filterCategory('cosmetics')">Eyeshadow</a>
+      <a href="javascript:void(0)" onclick="filterCategory('cosmetics')">Highlighter</a>
+
+      <strong>Household Items</strong>
+      <a href="javascript:void(0)" onclick="filterCategory('household')">Body Lotion</a>
+      <a href="javascript:void(0)" onclick="filterCategory('household')">Soap</a>
+      <a href="javascript:void(0)" onclick="filterCategory('household')">Cleaning Spray</a>
+      <a href="javascript:void(0)" onclick="filterCategory('household')">Hand Sanitizer</a>
+      <a href="javascript:void(0)" onclick="filterCategory('household')">Candles</a>
+
+      <a href="javascript:void(0)" onclick="filterCategory('all')">Show All</a>
+    </div>
+  </div>
+
+  <a href="cart.html"><button>View Cart</button></a>
+</nav>
+</header>
+
+<div class="banner">
+  <img src="images/banner2.jpg" alt="Beauty Banner">
+</div>
+
+<div class="search-bar">
+<input type="text" id="searchInput" placeholder="Search products...">
+</div>
+
+<div class="products" id="products">
+
+<!-- Products with data-category -->
+<div class="product" data-category="skincare">
+<h3>Luxury Face Cream</h3>
+<img src="images/product1.jpg" alt="Product 1" class="product-image">
+<p class="price">R350</p>
+<a href="product1.html"><button>View Product</button></a>
+<button onclick="addToCart('Luxury Face Cream', 350)">Add to Cart</button>
+</div>
+
+<div class="product" data-category="cosmetics">
+<h3>Hydrating Lip Balm</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,lip" alt="Hydrating Lip Balm">
+<p class="price">R120</p>
+<a href="product2.html"><button>View Product</button></a>
+<button onclick="addToCart('Hydrating Lip Balm', 120)">Add to Cart</button>
+</div>
+
+<div class="product" data-category="skincare">
+<h3>Anti-Aging Serum</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,serum" alt="Anti-Aging Serum">
+<p class="price">R450</p>
+<a href="product3.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="skincare">
+<h3>Glow Facial Mask</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,mask" alt="Glow Facial Mask">
+<p class="price">R280</p>
+<a href="product3.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="skincare">
+<h3>Refreshing Toner</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,toner" alt="Refreshing Toner">
+<p class="price">R220</p>
+<a href="product4.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="cosmetics">
+<h3>Matte Lipstick</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,lipstick" alt="Matte Lipstick">
+<p class="price">R150</p>
+<a href="product5.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="skincare">
+<h3>Vitamin C Serum</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,vitaminc" alt="Vitamin C Serum">
+<p class="price">R400</p>
+<a href="product6.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="skincare">
+<h3>Hand Cream Set</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,handcream" alt="Hand Cream Set">
+<p class="price">R320</p>
+<a href="product7.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="cosmetics">
+<h3>Eye Shadow Palette</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,eyeshadow" alt="Eye Shadow Palette">
+<p class="price">R500</p>
+<a href="product8.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="cosmetics">
+<h3>Nail Polish Set</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,nail" alt="Nail Polish Set">
+<p class="price">R220</p>
+<a href="product9.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="skincare">
+<h3>Hair Serum</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,hair" alt="Hair Serum">
+<p class="price">R350</p>
+<a href="product10.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="skincare">
+<h3>Face Cleanser</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,cleanser" alt="Face Cleanser">
+<p class="price">R180</p>
+<a href="product11.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="skincare">
+<h3>Shampoo & Conditioner</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,shampoo" alt="Shampoo & Conditioner">
+<p class="price">R380</p>
+<a href="product12.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="household">
+<h3>Body Lotion</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,lotion" alt="Body Lotion">
+<p class="price">R250</p>
+<a href="product13.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="perfume">
+<h3>Perfume</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,perfume" alt="Perfume">
+<p class="price">R600</p>
+<a href="product14.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="cosmetics">
+<h3>Makeup Remover</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,makeup" alt="Makeup Remover">
+<p class="price">R180</p>
+<a href="product15.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="skincare">
+<h3>Facial Roller</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,roller" alt="Facial Roller">
+<p class="price">R320</p>
+<a href="product16.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="cosmetics">
+<h3>Blush Kit</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,blush" alt="Blush Kit">
+<p class="price">R270</p>
+<a href="product17.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="cosmetics">
+<h3>Highlighter</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,highlighter" alt="Highlighter">
+<p class="price">R220</p>
+<a href="product18.html"><button>View Product</button></a>
+</div>
+
+<div class="product" data-category="household">
+<h3>Body Scrub</h3>
+<img src="https://source.unsplash.com/300x300/?beauty,scrub" alt="Body Scrub">
+<p class="price">R300</p>
+<a href="product19.html"><button>View Product</button></a>
+</div>
+
+</div>
+
+<footer>
+<p>&copy; 2025 Nomnotho Online Deals | <a href="#home">Home</a> | <a href="about.html">About Us</a> | <a href="faq.html">FAQ</a> | <a href="contact.html">Contact</a></p>
+</footer>
+
+<script>
+// OPEN/CLOSE PRODUCT SECTIONS
+function openProduct(num) {
+  document.getElementById('product'+num).style.display = 'block';
+  window.scrollTo(0, document.getElementById('product'+num).offsetTop);
+}
+function closeProduct(num) {
+  document.getElementById('product'+num).style.display = 'none';
+}
+
+// REVIEW SYSTEM
+let reviews = {};
+function addReview(num) {
+  const textArea = document.getElementById('review-text'+num);
+  const text = textArea.value.trim();
+  if(text === '') return;
+  if(!reviews[num]) reviews[num] = [];
+  reviews[num].push(text);
+  const div = document.getElementById('reviews-list'+num);
+  const p = document.createElement('p');
+  p.textContent = text;
+  div.appendChild(p);
+  textArea.value = '';
+}
+
+// SEARCH BAR
+document.getElementById('searchInput').addEventListener('input', function() {
+  const filter = this.value.toLowerCase();
+  const products = document.querySelectorAll('.products .product');
+  products.forEach(prod => {
+    const title = prod.querySelector('h3').textContent.toLowerCase();
+    prod.style.display = title.includes(filter) ? 'block' : 'none';
+  });
+});
+
+// CATEGORY FILTER
+function filterCategory(category) {
+  const products = document.querySelectorAll('.products .product');
+  products.forEach(prod => {
+    if(category === 'all' || prod.getAttribute('data-category') === category) {
+      prod.style.display = 'block';
+    } else {
+      prod.style.display = 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>
